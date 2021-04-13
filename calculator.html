@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<title>calculator</title>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+}
+div.whole {
+    background-color: rgb(255, 255, 255);
+    width: 600px;
+    height: 800px;
+    border: 1px solid green;
+}
+div.play {
+    background-color: rgb(255, 255, 255);
+    width: 600px;
+    height: 550px;
+    border: 1px solid rgb(116, 206, 14);
+}
+div.topbar {
+    background-color: rgb(255, 255, 255);
+    width: 600px;
+    height: 100px;
+    border: 1px solid rgb(32, 21, 190);
+}
+div.quiz {
+    background-color: rgb(255, 255, 255);
+    width: 600px;
+    height: 150px;
+    border: 1px solid rgb(32, 21, 190);
+}
+button.number {
+    width: 100px;
+    height: 100px;
+    border: none;
+    float: left;
+}
+button:active{
+ box-shadow: 0 5px #666;
+ transform: translateY(4px);
+}
+button:focus{
+ outline:none;
+}
+p.title{
+    font: 3em sans-serif;
+    color: coral;
+    text-align: center;
+    line-height: 100px;
+}
+p.question{
+    font: 5em sans-serif;
+    color: rgb(67, 46, 255);
+    text-align: center;
+    line-height: 150px;
+}
+
+</style>
+</head>
+<body>
+
+
+<div class="whole">  
+    <div class="topbar">  
+        <p id="t" class="title">Quiz Start! </p>
+    </div>
+    <div class="quiz">  
+        <p id="ans" class="question"></p>
+    </div>
+    <div class="play">  
+        <br />
+        <br />
+    </div>
+</div>
+<script>
+    var answer = 1;
+    function question(){
+        var a;
+        var b;
+        do {
+            a = Math.floor(Math.random()*10);
+            b = Math.floor(Math.random()*10);
+        }while((a+b)>9)
+        answer = a + b;
+        document.getElementById("ans").innerHTML=a+"+"+b+"= ?";
+    }
+    question();
+
+    function clic(element){
+        var id = element.id;
+        if(id ==answer){
+            document.getElementById("t").innerHTML="Well done";
+            document.getElementById("t").style.color="Green"
+            question()
+        }else{
+            document.getElementById("t").innerHTML="Sorry! Wrong!";
+            document.getElementById("t").style.color="Red"
+        }
+        };
+
+
+</script>
+
+<script>
+
+    for (var i=1;i<10;i++){
+        if(i%3==1){
+            a='<button id='+i+' class="number" onclick="clic(this)" style="background: url(images/number'+i+'.png); background-size: contain; margin-left: 150px;"></button>';
+        }
+        else{
+            a='<button id='+i+' class="number" onclick="clic(this)" style="background: url(images/number'+i+'.png); background-size: contain;"></button>';
+        }
+       $(".play").append(a);
+    }
+
+    $(".play").append('<button id='+i+' class="number" onclick="clic(this)" style="background: url(images/number0.png); background-size: contain;; margin-left: 250px;"></button>'); 
+</script>
+
+</body>
+</html>
